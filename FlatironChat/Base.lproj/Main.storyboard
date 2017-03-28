@@ -28,7 +28,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Join Chat ">
-                                    <color key="titleColor" red="1" green="0.99043348530184394" blue="0.903671948861133" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.99587255716323853" green="0.98952251672744751" blue="0.90571975708007812" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="joinBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wo1-hh-oJU"/>
@@ -43,6 +43,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJM-t4-x4a">
+                                <rect key="frame" x="35" y="256" width="305" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.99587255716323853" green="0.98952251672744751" blue="0.90571975708007812" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.905029296875" green="0.62839084201388884" blue="0.65524631076388884" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -51,16 +57,20 @@
                             <constraint firstItem="ktD-Ej-lEJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="HbF-WX-7ds"/>
                             <constraint firstItem="ktD-Ej-lEJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mkr-MD-cAF"/>
                             <constraint firstItem="ktD-Ej-lEJ" firstAttribute="width" secondItem="Jrn-oP-FjL" secondAttribute="width" id="TkP-WW-bpH"/>
+                            <constraint firstItem="TJM-t4-x4a" firstAttribute="width" secondItem="Jrn-oP-FjL" secondAttribute="width" id="eVK-gi-uHW"/>
+                            <constraint firstItem="TJM-t4-x4a" firstAttribute="leading" secondItem="Jrn-oP-FjL" secondAttribute="leading" id="g4a-6t-HGW"/>
+                            <constraint firstItem="TJM-t4-x4a" firstAttribute="top" secondItem="Jrn-oP-FjL" secondAttribute="bottom" constant="8" id="zHH-xX-svG"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loginLabel" destination="TJM-t4-x4a" id="bsO-tI-z7S"/>
                         <outlet property="screenNameField" destination="Jrn-oP-FjL" id="qB4-zm-sW2"/>
                         <segue destination="4lT-SX-PUJ" kind="presentation" identifier="openChannel" id="fbm-Vp-Vqb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-322" y="141"/>
+            <point key="canvasLocation" x="-322.39999999999998" y="140.77961019490255"/>
         </scene>
         <!--Channel View Controller-->
         <scene sceneID="LpS-Vj-mr4">
@@ -75,18 +85,18 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v99-GQ-nRe" id="Ctg-cw-E6T">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LhC-Ba-bS9">
-                                            <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                            <rect key="frame" x="15" y="4" width="34" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3DU-uM-9BW">
-                                            <rect key="frame" x="15" y="25.5" width="33" height="14.5"/>
+                                            <rect key="frame" x="15" y="25" width="33" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>

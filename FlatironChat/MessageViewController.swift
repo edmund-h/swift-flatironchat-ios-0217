@@ -33,7 +33,17 @@ class MessageViewController: JSQMessagesViewController  {
     
     
     func getMessages() {
-        
+        FirebaseClient.getMessages(from: channelId, then: {msgsDict in
+            self.messages = []
+            msgsDict.keys.forEach({ msgID in
+                if let thisMessage = msgsDict[msgID] as? [String:String] {
+                    guard let content = thisMessage["content"], let from = thisMessage["from"] else {return}
+                    print (from,"-",content)
+                    self.messages.append(JSQMessage(senderId: from, displayName: from, text: content))
+                }
+            })
+            self.collectionView.reloadData()
+        })
     }
     
 
@@ -41,8 +51,7 @@ class MessageViewController: JSQMessagesViewController  {
     
 
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-        
-        
+        FirebaseClient.sendMessage(with: text, to: channelId, then: {})
         self.finishSendingMessage(animated: true)
     }
     

@@ -5,7 +5,7 @@
 //  Created by Johann Kerr on 3/23/17.
 //
 //
-
+import Foundation
 import UIKit
 import Firebase
 
@@ -25,7 +25,14 @@ class ChannelViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        FirebaseClient.getChannels(then: {fireChannels in
+            DispatchQueue.main.async {
+                self.channels = []
+                self.tableView.reloadData()
+                self.channels = fireChannels
+                self.tableView.reloadData()
+            }
+        })
     }
     
     
@@ -34,17 +41,17 @@ class ChannelViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "msgSegue" {
-          
-            if let dest = segue.destination as? MessageViewController {
-                if let index = self.tableView.indexPathForSelectedRow?.row {
-                    let channel = self.channels[index].name
-                    dest.channelId = channel
-                    dest.senderId = user
-                    dest.senderDisplayName = user
-                }
-            }
+        guard segue.identifier == "msgSegue",
+            let dest = segue.destination as? MessageViewController
+            else {return}
+        if let index = self.tableView.indexPathForSelectedRow?.row {
+            let channel = self.channels[index].name
+            dest.channelId = channel
+            dest.senderId = user
+            dest.senderDisplayName = user
+            FirebaseClient.joinChannel(name: channel)
         }
+        
     }
     
     
@@ -57,7 +64,7 @@ class ChannelViewController: UITableViewController {
         
         let create = UIAlertAction(title: "Create", style: .default) { (action) in
             if let channel = alertController.textFields?[0].text {
-               
+                FirebaseClient.addChannel(name: channel, then:{self.tableView.reloadData()})
             }
         }
         
@@ -85,9 +92,9 @@ extension ChannelViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "channelCell", for: indexPath)
-        
-        cell.textLabel?.text = channels[indexPath.row].name
-        cell.detailTextLabel?.text = channels[indexPath.row].lastMsg
+        let cellChannel = channels[indexPath.row]
+        cell.textLabel?.text = "\(cellChannel.name) (\(cellChannel.numberOfParticipants))"
+        cell.detailTextLabel?.text = cellChannel.lastMsg
         
         
         return cell
